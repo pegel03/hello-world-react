@@ -9,6 +9,13 @@ const HtmlWebpackPluginConfig = new HtmlWebpackPlugin({
     inject: 'body'
 });
 
+const ExtractTextPlugin = require("extract-text-webpack-plugin");
+
+const extractLess = new ExtractTextPlugin({
+    filename: "[name].[contenthash].css",
+    disable: process.env.NODE_ENV === "development"
+});
+
 module.exports = {
     entry: './client/index.js',
     output: {
@@ -16,10 +23,20 @@ module.exports = {
         filename: 'index_bundle.js'
     },
     module: {
-        loaders: [
-            {test: /\.js$/, loader: 'babel-loader', exclude: /node_modules/},
-            {test: /\.jsx$/, loader: 'babel-loader', exclude: /node_modules/}
-        ]
+        rules: [            {test: /\.js$/, loader: 'babel-loader', exclude: /node_modules/},
+            {test: /\.jsx$/, loader: 'babel-loader', exclude: /node_modules/},
+            {
+            test: /\.less$/,
+            use: extractLess.extract({
+                use: [{
+                    loader: "css-loader"
+                }, {
+                    loader: "less-loader"
+                }],
+                // use style-loader in development
+                fallback: "style-loader"
+            })
+        }],
     },
-    plugins: [HtmlWebpackPluginConfig]
+    plugins: [HtmlWebpackPluginConfig, extractLess]
 };
