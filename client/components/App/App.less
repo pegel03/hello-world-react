@@ -1,15 +1,32 @@
+body {
+  overflow:hidden;
+}
+
 .bordered {
-  border: solid 2px red;
+  border: solid 1px red;
 }
 
-.hoofd {
-  .bordered
+.container {
+  display: flex; /* or inline-flex */
+  flex-direction: row;
+  width: auto;
+  height: 98vh;
+  border: solid 1px blue;
 }
 
-.links {
-  .bordered
+.left {
+  width: 23%;
+  margin: .5vw .5vh;
+  border: solid 1px yellow;
 }
 
-.rechts {
+.right {
+  display: flex; /* or inline-flex */
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  //width: 100%;
+  margin: .5vw .5vh;
   .bordered
 }
