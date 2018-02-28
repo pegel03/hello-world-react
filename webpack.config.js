@@ -23,20 +23,29 @@ module.exports = {
         filename: 'index_bundle.js'
     },
     module: {
-        rules: [            {test: /\.js$/, loader: 'babel-loader', exclude: /node_modules/},
+        rules: [{test: /\.js$/, loader: 'babel-loader', exclude: /node_modules/},
             {test: /\.jsx$/, loader: 'babel-loader', exclude: /node_modules/},
             {
-            test: /\.less$/,
-            use: extractLess.extract({
-                use: [{
-                    loader: "css-loader"
-                }, {
-                    loader: "less-loader"
-                }],
-                // use style-loader in development
-                fallback: "style-loader"
-            })
-        }],
+                test: /\.less$/,
+                use: extractLess.extract({
+                    use: [{
+                        loader: "css-loader"
+                    }, {
+                        loader: "less-loader"
+                    }],
+                    // use style-loader in development
+                    fallback: "style-loader"
+                })
+            },
+            {
+                test: /\.(png|jpg|gif)$/,
+                use: [
+                    {
+                        loader: 'file-loader',
+                        options: {}
+                    }
+                ]
+            }],
     },
     plugins: [HtmlWebpackPluginConfig, extractLess]
 };
