@@ -20,7 +20,7 @@ export default class App extends PureComponent {
                     <h1>Links dus</h1>
                     <h1>Hello to you too:) nr two</h1>
                 </div>
-                <div className="right" >
+                <div className="right flip-container" >
                     {bloks.map((b, index) => <Block key={index} naam={b} />)}
                 </div>
             </div>

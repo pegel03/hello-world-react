@@ -21,12 +21,16 @@ export default class Block extends PureComponent {
     }
 
     render() {
-        const pic = require('./backSide.jpg');
-        var classnames = classNames('block');
-
+        const pic = require('./shitHappens.png');
+        const picBackGround = require('./backSide.jpg');
+        const flipClass = this.state.isToggled ? 'flip back' : null;
+        const cNames = classNames('block flipper', flipClass);
+        console.log('pgl classNames: ', cNames);
+        {/*<h1>Blokkie: {this.props.naam}</h1>*/}
         return (
-            <a href="#" className={classnames} onClick={this.handleClick}>
-                <h1>Blokkie: {this.props.naam}</h1>
+            <a href="#" className={cNames} onClick={this.handleClick}>
+                <img className="plaatje front" src={pic} />
+                {/*<img className="plaatje back" src={picBackGround} />*/}
             </a>
         );
     }
